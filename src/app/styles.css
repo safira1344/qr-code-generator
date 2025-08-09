@@ -4,3 +4,85 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #DBEAFE, #ADD0FF);
+    gap: 32px;
+
+    .title-container {
+        position: relative;
+
+
+        .page-title {
+            font-weight: 600;
+            text-align: center;
+            font-size: 32px;
+
+            span {
+                color: #4F46E5;
+            }
+        }
+        .arrow-detail {
+            position: absolute;
+            right: -90px;
+            height: 130px;
+            transform: rotate(-10deg);
+        }
+    }
+
+    .qr-code-container {
+        background-color: #F8FAFC;
+        padding: 12px;
+        border-radius: 12px;
+        display: flex;
+        gap: 12px;
+        width: 700px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
+        .qr-code, qr-code-customization {
+            background-color: #FFFFFF;
+            padding: 18px;
+            border-radius: 12px;
+            width: 50%;
+        }
+
+        .qr-code {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            .link-input {
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
+
+                label {
+                    font-weight: 600;
+                    font-size: 14px;
+                }
+
+                input {
+                    padding: 10px;
+                    border-radius: 8px;
+                    border: solid 1px #E2E8F0;
+
+                    &:focus {
+                        outline: 1px solid #4F46E5;
+                    }
+                }
+            }
+
+            .qr-code-preview {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
+        }
+    }
+}
