@@ -14,7 +14,7 @@ export default function Home() {
 				<img 
 					src="/arrow.svg"
 					alt="detail"
-					className="arrrow-detail" 
+					className="arrow-detail" 
 				/>
 			</section>
 

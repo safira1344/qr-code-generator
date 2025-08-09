@@ -31,6 +31,7 @@
             position: absolute;
             right: -90px;
             height: 130px;
+            top: 10px;
             transform: rotate(-10deg);
         }
     }
@@ -125,7 +126,28 @@
                             border-radius: 8px;
                             border: none;
                             padding: 8px 12px;
-                            color: #ffff;
+                            color: #FFFFFF;
+                            display: flex;
+                            justify-content: center;
+                            cursor: pointer;
+                            font-size: 14px;
+                            width: fit-content;
+                        }
+
+                        #logoSize {
+                            background-color: #F8FAFC;
+                            border: 1px solid #E2E8F0;
+                            padding: 8px 12px;
+                            border-radius: 8px;
+                            appearance: none;
+                            background-image: url("../../public/chevron-down.svg");
+                            background-repeat: no-repeat;
+                            background-position: right 12px center;
+                            background-size: 18px;
+
+                            &:focus {
+                                outline: 1px solid #4F46E5;
+                            }
                         }
                     }
                 }
@@ -143,6 +165,21 @@
                         cursor: pointer;
                     }
 
+                }
+            }
+
+            .download-button {
+                background-color: #4F46E5;
+                color: #FFFFFF;
+                padding: 12px 24px;
+                border-radius: 8px;
+                font-weight: 600;
+                border: none;
+                cursor: pointer;
+                transition: background-color 0.2s;
+
+                &:hover {
+                    background-color: #4338ca;
                 }
             }
         }
