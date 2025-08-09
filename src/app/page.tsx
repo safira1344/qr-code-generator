@@ -1,6 +1,7 @@
 "use client"
 
 import {QRCodeCanvas} from 'qrcode.react';
+import { FaUpload } from "react-icons/fa";
 
 export default function Home() {
 	return (
@@ -60,17 +61,67 @@ export default function Home() {
 							Cores
 						</h3>
 
-						<div className='input-container'>
+						<div className='input-container colors'>
 							<div className='input-box'>
-								<label htmlFor="">
+								<label htmlFor="fgColor">
 									Cor Principal
 								</label>
+								<input 
+									type="color"
+									className='input-color'
+									id="fgColor"
+								/>
+							</div>
+
+							<div className='input-box'>
+								<label htmlFor="bgColor">
+									Cor do fundo
+								</label>
+								<input 
+									type="color"
+									className='input-color'
+									id="bgColor"
+								/>
 							</div>
 						</div>
 					</div>
 
 					<div className="customization-container">
-						
+						<h3>
+							Logo
+						</h3>
+
+						<div className='input-container'>
+							<div className='input-box'>
+								<label htmlFor="logo">
+									Insira seu logo
+								</label>
+								<input 
+									type="file"
+									className='input-file'
+									id="logo"
+									accept='image/*'
+								/>
+
+								<button className='input-file-button'>
+									<FaUpload />
+									Escolher arquivo
+								</button>
+							</div>
+
+							<div className='input-box'>
+								<label htmlFor="logoSize">
+									Tamanho da logo
+								</label>
+								<select 
+									name="logoSize" id="logoSize"
+								>
+									<option value="24">24px x 24px</option>
+									<option value="38">38px x 38px</option>
+									<option value="50">50px x 50px</option>
+								</select>
+							</div>
+						</div>
 					</div>
 
 					<button className='download-button'>
