@@ -2,8 +2,44 @@
 
 import {QRCodeCanvas} from 'qrcode.react';
 import { FaUpload } from "react-icons/fa";
+import { useRef, useState } from "react"
 
 export default function Home() {
+	const [linkValue, setLinkValue] = useState<string>('');
+	const [fgColor, setFgColor] = useState<string>('#FFFFFF');
+	const [bgColor, setBgColor] = useState<string>('');
+	const [logoUrl, setLogoUrl] = useState<string>('https://static.zpao.com/favicon.png');
+	const [logoSize, setLogoSize] = useState<number>(38);
+	const qrCodeRef = useRef<HTMLDivElement>(null);
+
+	const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const file = e.target.files?.[0];
+
+		if(file) {
+			const reader = new FileReader();
+
+			reader.onload = () => {
+				if(reader.result) {
+					setLogoUrl(reader.result as string);
+				}
+			}
+
+			reader.readAsDataURL(file);
+		}
+	}
+
+	const handleDownload = () => {
+		if(!qrCodeRef.current) return;
+		const canvas = qrCodeRef.current.querySelector("canvas");
+		if(!canvas) return;
+
+		const link = document.createElement("a");
+
+		link.href = canvas.toDataURL("image/png");
+		link.download = "qrcode.png";
+		link.click();
+	}
+
 	return (
 		<main className="container">
 			<section className="title-container">
@@ -28,6 +64,8 @@ export default function Home() {
 							type="text"
 							id="link"
 							placeholder="Seu link aqui"	
+							value={linkValue}
+							onChange={(e) => setLinkValue(e.target.value)}
 						/>
 				</div>
 
@@ -36,22 +74,25 @@ export default function Home() {
 							QR Code Preview 
 						</p>
 
-						<QRCodeCanvas
-							value={"https://picturesofpeoplescanningqrcodes.tumblr.com/"}
-							title={""}
-							size={200}
-							bgColor={"#ffffff"}
-							fgColor={"#000000"}
-							imageSettings={{
-								src: "https://static.zpao.com/favicon.png",
-								x: undefined,
-								y: undefined,
-								height: 24,
-								width: 24,
-								opacity: 1,
-								excavate: true,
-							}}
-						/>
+						<div ref={qrCodeRef}>
+							<QRCodeCanvas
+								value={linkValue}
+								title={linkValue}
+								size={200}
+								bgColor={bgColor}
+								fgColor={fgColor}
+								imageSettings={{
+									src: logoUrl,
+									x: undefined,
+									y: undefined,
+									height: logoSize,
+									width: logoSize,
+									opacity: 1,
+									excavate: true,
+									crossOrigin: 'anonymous'
+								}}
+							/>
+						</div>
 					</div>
 				</div>
 
@@ -70,6 +111,8 @@ export default function Home() {
 									type="color"
 									className='input-color'
 									id="fgColor"
+									value={fgColor}
+									onChange={(e) => setFgColor(e.target.value)}
 								/>
 							</div>
 
@@ -81,6 +124,8 @@ export default function Home() {
 									type="color"
 									className='input-color'
 									id="bgColor"
+									value={bgColor}
+									onChange={(e) => setBgColor(e.target.value)}
 								/>
 							</div>
 						</div>
@@ -101,6 +146,7 @@ export default function Home() {
 									className='input-file'
 									id="logo"
 									accept='image/*'
+									onChange={handleLogoChange}
 								/>
 
 								<button className='input-file-button'>
@@ -114,7 +160,10 @@ export default function Home() {
 									Tamanho da logo
 								</label>
 								<select 
-									name="logoSize" id="logoSize"
+									name="logoSize" 
+									id="logoSize"
+									value={logoSize}
+									onChange={(e) => setLogoSize(Number(e.target.value))}
 								>
 									<option value="24">24px x 24px</option>
 									<option value="38">38px x 38px</option>
@@ -124,7 +173,7 @@ export default function Home() {
 						</div>
 					</div>
 
-					<button className='download-button'>
+					<button className='download-button' onClick={handleDownload}>
 						Baixar QR Code
 					</button>
 				</div>
